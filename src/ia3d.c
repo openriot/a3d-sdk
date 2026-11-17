@@ -153,6 +153,11 @@ HRESULT WINAPI A3dCreate(LPGUID  lpGUID,	        /* in,  Prefered Driver Guid, N
 	   /* newer A3d.dll                                         */
 
        IA3d2_RegisterVersion(pIA3d2,A3D_CURRENT_VERSION);
+       
+	   /* QueryInterface incremented the COM refcount; release the local IA3d2 */
+	   /* pointer so *ppDS returns to the caller with a refcount of 1 instead of 2 */
+	   
+	   IA3d2_Release(pIA3d2);
 
      } 
 
