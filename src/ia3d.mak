@@ -34,23 +34,23 @@ INTDIR=.\Release
 
 !IF "$(RECURSE)" == "0" 
 
-ALL : "..\..\..\lib\Release\ia3d.lib"
+ALL : "..\lib\Release\ia3d.lib"
 
 !ELSE 
 
-ALL : "..\..\..\lib\Release\ia3d.lib"
+ALL : "..\lib\Release\ia3d.lib"
 
 !ENDIF 
 
 CLEAN :
 	-@erase "$(INTDIR)\vc50.idb"
-	-@erase "..\..\..\lib\Release\ia3d.lib"
+	-@erase "..\lib\Release\ia3d.lib"
 	-@erase ".\Release\ia3d.obj"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
-CPP_PROJ=/nologo /MT /W3 /GX /O2 /I "..\..\..\inc" /D "WIN32" /D "NDEBUG" /D\
+CPP_PROJ=/nologo /MT /W3 /GX /O2 /I "..\inc" /D "WIN32" /D "NDEBUG" /D\
  "_WINDOWS" /Fp"$(INTDIR)\ia3d.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c\
  
 CPP_OBJS=.\Release/
@@ -60,11 +60,11 @@ BSC32_FLAGS=/nologo /o"$(OUTDIR)\ia3d.bsc"
 BSC32_SBRS= \
 	
 LIB32=link.exe -lib
-LIB32_FLAGS=/nologo /out:"..\..\..\lib\Release\ia3d.lib" 
+LIB32_FLAGS=/nologo /out:"..\lib\Release\ia3d.lib" 
 LIB32_OBJS= \
 	".\Release\ia3d.obj"
 
-"..\..\..\lib\Release\ia3d.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+"..\lib\Release\ia3d.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
   $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
 <<
@@ -79,25 +79,25 @@ OutDir=.\Debug
 
 !IF "$(RECURSE)" == "0" 
 
-ALL : "..\..\..\Lib\Debug\ia3dd.lib" "$(OUTDIR)\ia3d.bsc"
+ALL : "..\lib\Debug\ia3dd.lib" "$(OUTDIR)\ia3d.bsc"
 
 !ELSE 
 
-ALL : "..\..\..\Lib\Debug\ia3dd.lib" "$(OUTDIR)\ia3d.bsc"
+ALL : "..\lib\Debug\ia3dd.lib" "$(OUTDIR)\ia3d.bsc"
 
 !ENDIF 
 
 CLEAN :
 	-@erase "$(INTDIR)\vc50.idb"
 	-@erase "$(OUTDIR)\ia3d.bsc"
-	-@erase "..\..\..\Lib\Debug\ia3dd.lib"
+	-@erase "..\lib\Debug\ia3dd.lib"
 	-@erase ".\Debug\ia3d.obj"
 	-@erase ".\Debug\ia3d.sbr"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
-CPP_PROJ=/nologo /MTd /W3 /GX /Z7 /Od /I "..\..\..\inc" /D "WIN32" /D "_DEBUG"\
+CPP_PROJ=/nologo /MTd /W3 /GX /Z7 /Od /I "..\inc" /D "WIN32" /D "_DEBUG"\
  /D "_WINDOWS" /FR"$(INTDIR)\\" /Fp"$(INTDIR)\ia3d.pch" /YX /Fo"$(INTDIR)\\"\
  /Fd"$(INTDIR)\\" /FD /c 
 CPP_OBJS=.\Debug/
@@ -113,11 +113,11 @@ BSC32_SBRS= \
 <<
 
 LIB32=link.exe -lib
-LIB32_FLAGS=/nologo /out:"..\..\..\Lib\Debug\ia3dd.lib" 
+LIB32_FLAGS=/nologo /out:"..\lib\Debug\ia3dd.lib" 
 LIB32_OBJS= \
 	".\Debug\ia3d.obj"
 
-"..\..\..\Lib\Debug\ia3dd.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+"..\lib\Debug\ia3dd.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
   $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
 <<
@@ -158,13 +158,12 @@ LIB32_OBJS= \
 !IF "$(CFG)" == "ia3d - Win32 Release" || "$(CFG)" == "ia3d - Win32 Debug"
 SOURCE=.\ia3d.c
 DEP_CPP_IA3D_=\
-	"..\..\..\inc\ia3d.h"\
-	
-INTDIR_SRC=.\Release
+	"..\inc\ia3d.h"\
 
 !IF  "$(CFG)" == "ia3d - Win32 Release"
 
-CPP_SWITCHES=/nologo /MT /W3 /GX /O2 /I "..\..\..\inc" /D "WIN32" /D "NDEBUG"\
+INTDIR_SRC=.\Release
+CPP_SWITCHES=/nologo /MT /W3 /GX /O2 /I "..\inc" /D "WIN32" /D "NDEBUG"\
  /D "_WINDOWS" /Fp"$(INTDIR_SRC)\ia3d.pch" /YX /Fo"$(INTDIR_SRC)\\"\
  /Fd"$(INTDIR_SRC)\\" /FD /c 
 
@@ -176,7 +175,8 @@ CPP_SWITCHES=/nologo /MT /W3 /GX /O2 /I "..\..\..\inc" /D "WIN32" /D "NDEBUG"\
 
 !ELSEIF  "$(CFG)" == "ia3d - Win32 Debug"
 
-CPP_SWITCHES=/nologo /MTd /W3 /GX /Z7 /Od /I "..\..\..\inc" /D "WIN32" /D\
+INTDIR_SRC=.\Debug
+CPP_SWITCHES=/nologo /MTd /W3 /GX /Z7 /Od /I "..\inc" /D "WIN32" /D\
  "_DEBUG" /D "_WINDOWS" /FR"$(INTDIR_SRC)\\" /Fp"$(INTDIR_SRC)\ia3d.pch" /YX\
  /Fo"$(INTDIR_SRC)\\" /Fd"$(INTDIR_SRC)\\" /FD /c 
 
